@@ -1,9 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { bindNodeCallback, Observable } from 'rxjs';
 import { User } from './user.interface';
-import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class UserService {
@@ -13,17 +11,14 @@ export class UserService {
     ) {
     }
 
-    findOne(username: string) {
-        // this.userModel.find((err, res) => {
-        //     if (err) {
-        //         console.log(err);
-        //     }
-        //     console.log('+++++++++++++++++', res);
-        // })
-        console.log(username);
-        const user$ = bindNodeCallback(this.userModel.find.bind(this.userModel));
-        return user$({ name: username }).pipe(
-            tap(console.log)
-        )
+    async findOneByUsername(username: string): Promise<User> {
+        return new Promise((resolve, reject) => {
+            this.userModel.findOne({ name: username }, (err, user) => {
+                if (err) {
+                    return reject(err)
+                }
+                resolve(user);
+            })
+        });
     }
 }
