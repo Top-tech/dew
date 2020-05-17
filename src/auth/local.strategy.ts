@@ -19,7 +19,6 @@ export class LocalStrategy extends PassportStrategy(Strategy, 'local') {
         username: string,
         password: string,
     ) {
-        console.log(2222);
         const contextId = ContextIdFactory.getByRequest(request);
         // "AuthService" is a request-scoped provider
         const authService = await this.moduleRef.resolve(AuthService, contextId);

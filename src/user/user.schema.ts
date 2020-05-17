@@ -6,9 +6,10 @@ export const UserSchema = new Schema({
     email: Schema.Types.String,
     // TODO: Create a custom Phone type.
     phone: Schema.Types.String,
+    salt: String,
     password: String,
     created: Schema.Types.Date,
     updated: Schema.Types.Date,
-    lastLogin: { type: Schema.Types.Date, default: Date.now() },
+    lastLogin: Schema.Types.Date,
     deprecated: { type: Schema.Types.Boolean, default: false }
 });
