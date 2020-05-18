@@ -1,4 +1,10 @@
-import { Injectable, InternalServerErrorException, UnauthorizedException } from '@nestjs/common';
+import {
+    ForbiddenException,
+    HttpException,
+    Injectable,
+    InternalServerErrorException,
+    UnauthorizedException
+} from '@nestjs/common';
 import { UserService } from '../user/user.service';
 import { User } from '../user/user.interface';
 import { CreateUserDto } from '../user/user.dto';
@@ -17,6 +23,9 @@ export class AuthService {
      */
     async validateUser(username: string, pass: string): Promise<Partial<User>> {
         const user = await this.usersService.findOneByUsername(username);
+        if (!user) {
+            throw new ForbiddenException('Haven\'t register.')
+        }
         if (!user.salt) {
             throw new UnauthorizedException('hacking')
         }
