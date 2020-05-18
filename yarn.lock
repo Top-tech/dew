@@ -4299,7 +4299,7 @@ interpret@^1.0.0:
   resolved "https://registry.npm.taobao.org/interpret/download/interpret-1.2.0.tgz?cache=0&sync_timestamp=1571708682279&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Finterpret%2Fdownload%2Finterpret-1.2.0.tgz#d5061a6224be58e8083985f5014d844359576296"
   integrity sha1-1QYaYiS+WOgIOYX1AU2EQ1lXYpY=
 
-ioredis@^4.14.1:
+ioredis@^4.14.1, ioredis@^4.17.1:
   version "4.17.1"
   resolved "https://registry.npm.taobao.org/ioredis/download/ioredis-4.17.1.tgz#06ef3d3b2cb96b7e6bc90a7b8839a33e743843ad"
   integrity sha1-Bu89Oyy5a35ryQp7iDmjPnQ4Q60=
