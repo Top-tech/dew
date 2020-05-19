@@ -101,10 +101,17 @@ export class UserService {
     }
 
     async updateUser(username: string, createUserDto: UpdateUserDto) {
-        return this.userModel.update({ name: username }, {
-            ...createUserDto,
-            update: Date.now()
-        });
+        return new Promise((resolve, reject) => {
+            return this.userModel.updateOne({ name: username }, {
+                ...createUserDto,
+                update: Date.now()
+            }, (err, raw) => {
+                if (err) {
+                    return reject(err);
+                }
+                return resolve(raw);
+            });
+        })
     }
 
     async abandonUser(username: string) {

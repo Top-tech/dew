@@ -1,5 +1,6 @@
 import {
-    IsEmail,
+    IsDate,
+    IsEmail, IsIP,
     IsNotEmpty,
     IsPhoneNumber,
     Matches,
@@ -55,7 +56,10 @@ export class CreateUserDto {
 }
 
 export class UpdateUserDto {
-    readonly name?: string;
-    readonly email?: string;
-    readonly phone?: string;
+    // readonly email?: string;
+    // readonly phone?: string;
+    @IsIP(4)
+    readonly ip;
+
+    readonly lastLoginTime?;
 }

@@ -14,6 +14,7 @@ import { RedisModule } from 'nestjs-redis'
             session: false,
         }),
         RedisModule.register({
+            name: 'titanx',
             host: 'r-8vbtu2cukh3iqdsxpqpd.redis.zhangbei.rds.aliyuncs.com',
             port: 6379,
             password: 'MhxzKhl$#%&'

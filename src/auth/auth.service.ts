@@ -9,12 +9,19 @@ import { UserService } from '../user/user.service';
 import { User } from '../user/user.interface';
 import { CreateUserDto } from '../user/user.dto';
 import { DatabaseException } from '../core/exceptions/databaseException';
+import { randomBytes } from "crypto";
+import { RedisService } from 'nestjs-redis';
+import { Redis } from 'ioredis';
 
 @Injectable()
 export class AuthService {
+    private redisClientTitanx: Redis
+
     constructor(
-        private usersService: UserService
+        private usersService: UserService,
+        private redisService: RedisService
     ) {
+        this.redisClientTitanx = this.redisService.getClient('titanx');
     }
 
     /**
@@ -63,5 +70,32 @@ export class AuthService {
             throw new InternalServerErrorException(500, 'result went wrong');
         }
         return result;
+    }
+
+    // TODO: Token interface
+    async generateLoginToken(): Promise<string> {
+        return new Promise((resolve, reject) => {
+            randomBytes(64, (err, buf) => {
+                if (err) {
+                    return reject(err);
+                }
+                return resolve(buf.toString('hex'));
+            })
+        })
+    }
+
+    async login(req) {
+        const update = await this.usersService.updateUser(req.user.username, {
+            ip: req.ip,
+            lastLoginTime: Date.now()
+        })
+        if (!update) {
+            throw new InternalServerErrorException();
+        }
+        return update;
+    }
+
+    async saveTokenIntoRedis(token, user) {
+        return await this.redisClientTitanx.set(token, user._doc._id)
     }
 }
