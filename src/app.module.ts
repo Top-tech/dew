@@ -1,13 +1,26 @@
-import { Module } from "@nestjs/common";
-import { AppController } from "./app.controller";
-import { AppService } from "./app.service";
+import { Module } from '@nestjs/common';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
-import { UsersModule } from './users/users.module';
+import { CoreModule } from './core/core.module';
 
 @Module({
-    imports: [AuthModule, UsersModule],
+    imports: [
+        CoreModule,
+        AuthModule,
+    ],
     controllers: [AppController],
-    providers: [AppService]
+    providers: [AppService],
 })
 export class AppModule {
+
+    // configure(consumer: MiddlewareConsumer): any {
+    //     consumer.apply(AuthMiddleware)
+    //         .exclude({
+    //             path: 'auth/login',
+    //             method: RequestMethod.POST
+    //         })
+    //         .forRoutes(AuthController)
+    // }
+
 }
