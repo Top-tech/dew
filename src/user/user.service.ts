@@ -101,6 +101,7 @@ export class UserService {
     }
 
     async updateUser(username: string, createUserDto: UpdateUserDto) {
+        console.log(username);
         return new Promise((resolve, reject) => {
             return this.userModel.updateOne({ name: username }, {
                 ...createUserDto,

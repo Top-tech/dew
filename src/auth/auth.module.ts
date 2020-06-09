@@ -3,10 +3,12 @@ import { UserModule } from '../user/user.module';
 import { AuthService } from './auth.service';
 import { LocalStrategy } from './local.strategy';
 import { AuthController } from './auth.controller';
+import { PassportModule } from '@nestjs/passport';
 
 @Module({
     imports: [
-        UserModule
+        UserModule,
+        PassportModule
     ],
     providers: [
         AuthService,

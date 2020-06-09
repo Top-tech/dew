@@ -2,7 +2,7 @@ import {
     ForbiddenException,
     HttpException,
     Injectable,
-    InternalServerErrorException,
+    InternalServerErrorException, Scope,
     UnauthorizedException
 } from '@nestjs/common';
 import { UserService } from '../user/user.service';
@@ -13,7 +13,7 @@ import { randomBytes } from "crypto";
 import { RedisService } from 'nestjs-redis';
 import { Redis } from 'ioredis';
 
-@Injectable()
+@Injectable({ scope: Scope.REQUEST })
 export class AuthService {
     private redisClientTitanx: Redis
 
@@ -85,9 +85,9 @@ export class AuthService {
     }
 
     async login(req) {
-        const update = await this.usersService.updateUser(req.user.username, {
+        const update = await this.usersService.updateUser(req.user._doc.name, {
             ip: req.ip,
-            lastLoginTime: Date.now()
+            lastLogin: Date.now()
         })
         if (!update) {
             throw new InternalServerErrorException();

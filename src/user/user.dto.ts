@@ -61,5 +61,5 @@ export class UpdateUserDto {
     @IsIP(4)
     readonly ip;
 
-    readonly lastLoginTime?;
+    readonly lastLogin?;
 }
