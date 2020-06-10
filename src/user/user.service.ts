@@ -46,7 +46,6 @@ export class UserService {
      * Search user by phone number.
      *
      * @param phone <string>
-     * TODO: The phone's type may not only be string. All valid phone's type should be support.
      */
     async findOneByPhoneNumber(phone: string): Promise<User> {
         return new Promise((resolve, reject) => {
@@ -101,7 +100,6 @@ export class UserService {
     }
 
     async updateUser(username: string, createUserDto: UpdateUserDto) {
-        console.log(username);
         return new Promise((resolve, reject) => {
             return this.userModel.updateOne({ name: username }, {
                 ...createUserDto,
