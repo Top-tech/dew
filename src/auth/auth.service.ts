@@ -107,6 +107,9 @@ export class AuthService {
     }
 
     async saveTokenIntoRedis(token, user) {
-        return await this.redisClientTitanx.set(token, user._doc._id)
+        // return await this.redisClientTitanx.hset(token, user._doc._id)
+        return await this.redisClientTitanx.send_command('HSET', token,
+            '_id', user._doc._id
+        );
     }
 }

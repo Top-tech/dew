@@ -23,7 +23,7 @@ export class AuthController {
         if (!result) {
             throw new InternalServerErrorException();
         }
-        return token;
+        return { token };
     }
 
     @Post('/register')
