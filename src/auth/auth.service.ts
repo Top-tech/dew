@@ -107,9 +107,10 @@ export class AuthService {
     }
 
     async saveTokenIntoRedis(token, user) {
-        // return await this.redisClientTitanx.hset(token, user._doc._id)
-        return await this.redisClientTitanx.send_command('HSET', token,
-            '_id', user._doc._id
-        );
+        // TODO: <IORedis> Now it only support single key-value HSET. Transform it to Array when IORedis supports multi key-value HSET.
+        return await this.redisClientTitanx.pipeline()
+            .hset(token, '_id', user._doc._id)
+            .expire(token, 60 * 60 * 6)
+            .exec();
     }
 }
