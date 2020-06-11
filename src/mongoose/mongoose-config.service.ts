@@ -4,7 +4,6 @@ import { MongooseModuleOptions, MongooseOptionsFactory } from '@nestjs/mongoose'
 @Injectable()
 export class MongooseConfigService implements MongooseOptionsFactory {
     createMongooseOptions(): MongooseModuleOptions {
-        console.log('mongoose config returned');
         return {
             uri: 'mongodb://titanx:MhxzKhl$#%&@dds-8vbc17945a6858d41110-pub.mongodb.zhangbei.rds.aliyuncs.com:3717/titanx',
             useNewUrlParser: true,

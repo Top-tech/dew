@@ -14,7 +14,6 @@ export class AuthController {
     @Post('/login')
     @UseGuards(LocalAuthGuard)
     async login(@Req() request) {
-        console.log(request.user._doc);
         const token = await this.authService.generateLoginToken();
         const redisResponse = await this.authService.saveTokenIntoRedis(token, request.user);
         if (!redisResponse) {
@@ -24,7 +23,7 @@ export class AuthController {
         if (!result) {
             throw new InternalServerErrorException();
         }
-        return token;
+        return { token };
     }
 
     @Post('/register')

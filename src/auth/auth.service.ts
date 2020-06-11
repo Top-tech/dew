@@ -12,6 +12,9 @@ import { DatabaseException } from '../core/exceptions/databaseException';
 import { randomBytes } from "crypto";
 import { RedisService } from 'nestjs-redis';
 import { Redis } from 'ioredis';
+import { isEmail } from '../util/isEmail';
+import { isMobilePhone } from 'class-validator';
+import { isIllegalString } from '../util/isIllegalString';
 
 @Injectable({ scope: Scope.REQUEST })
 export class AuthService {
@@ -29,12 +32,22 @@ export class AuthService {
      * @param pass: Receive from clint, unencrypted password.
      */
     async validateUser(username: string, pass: string): Promise<Partial<User>> {
-        const user = await this.usersService.findOneByUsername(username);
+        if (isIllegalString(username)) {
+            throw new InternalServerErrorException('Illegal username or password');
+        }
+        let user;
+        if (isEmail(username)) {
+            user = await this.usersService.findOneByEmail(username);
+        } else if (isMobilePhone(username, 'zh-CN')) {
+            user = await this.usersService.findOneByPhoneNumber(username);
+        } else {
+            user = await this.usersService.findOneByUsername(username);
+        }
         if (!user) {
-            throw new ForbiddenException('Haven\'t register.')
+            throw new ForbiddenException('Haven\'t register.');
         }
         if (!user.salt) {
-            throw new UnauthorizedException('hacking')
+            throw new UnauthorizedException('hacking');
         }
         const inputPassword = await this.usersService.encryptPassword(pass, user.salt);
         if (user && user.password === inputPassword) {
@@ -57,13 +70,11 @@ export class AuthService {
         }
 
         const salt = await this.usersService.generateSalt();
-        console.log(salt);
         // if (!salt) {
         //     throw new InternalServerErrorException();
         // }
         const encryptedPassword = await this.usersService.encryptPassword(register.password, salt);
         const result = await this.usersService.createUser({...register, password: encryptedPassword}, salt);
-        console.log(encryptedPassword, result);
         if (!result) {
             // TODO: When Fastify new version is ready, switch to custom status code.
             // throw new DatabaseException();
@@ -96,6 +107,10 @@ export class AuthService {
     }
 
     async saveTokenIntoRedis(token, user) {
-        return await this.redisClientTitanx.set(token, user._doc._id)
+        // TODO: <IORedis> Now it only support single key-value HSET. Transform it to Array when IORedis supports multi key-value HSET.
+        return await this.redisClientTitanx.pipeline()
+            .hset(token, '_id', user._doc._id)
+            .expire(token, 60 * 60 * 6)
+            .exec();
     }
 }
