@@ -3,6 +3,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { CoreModule } from './core/core.module';
+import { APP_GUARD } from '@nestjs/core';
+import { TokenGuard } from './token.guard';
 
 @Module({
     imports: [
@@ -10,7 +12,13 @@ import { CoreModule } from './core/core.module';
         AuthModule,
     ],
     controllers: [AppController],
-    providers: [AppService],
+    providers: [
+        AppService,
+        {
+            provide: APP_GUARD,
+            useClass: TokenGuard,
+        }
+    ],
 })
 export class AppModule {
 
