@@ -4,7 +4,7 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { CoreModule } from './core/core.module';
 import { APP_GUARD } from '@nestjs/core';
-import { TokenGuard } from './token.guard';
+import { TokenGuard } from './guards/token.guard';
 
 @Module({
     imports: [
