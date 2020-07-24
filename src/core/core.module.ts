@@ -14,10 +14,10 @@ import { RedisModule } from 'nestjs-redis'
             session: false,
         }),
         RedisModule.register({
-            name: 'titanx',
-            host: 'r-8vbtu2cukh3iqdsxpqpd.redis.zhangbei.rds.aliyuncs.com',
-            port: 6379,
-            password: 'MhxzKhl$#%&'
+            name: process.env.REDIS_USER,
+            host: process.env.REDIS_HOST,
+            port: +process.env.REDIS_PORT,
+            password: process.env.REDIS_PASSWORD
         })
     ]
 })

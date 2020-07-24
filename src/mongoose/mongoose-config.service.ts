@@ -5,7 +5,7 @@ import { MongooseModuleOptions, MongooseOptionsFactory } from '@nestjs/mongoose'
 export class MongooseConfigService implements MongooseOptionsFactory {
     createMongooseOptions(): MongooseModuleOptions {
         return {
-            uri: 'mongodb://titanx:MhxzKhl$#%&@dds-8vbc17945a6858d41110-pub.mongodb.zhangbei.rds.aliyuncs.com:3717/titanx',
+            uri: `mongodb://${process.env.DATABASE_USER}:${process.env.DATABASE_PASSWORD}@${process.env.DATABASE_URI}`,
             useNewUrlParser: true,
             useUnifiedTopology: true
             // connectionFactory: connection => {
