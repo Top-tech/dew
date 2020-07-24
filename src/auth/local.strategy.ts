@@ -5,7 +5,7 @@ import { AuthService } from './auth.service';
 import { ContextIdFactory, ModuleRef } from '@nestjs/core';
 
 @Injectable()
-export class LocalStrategy extends PassportStrategy(Strategy) {
+export class LocalStrategy extends PassportStrategy(Strategy, 'local') {
     constructor(
         private moduleRef: ModuleRef
     ) {
