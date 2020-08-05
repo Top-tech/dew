@@ -1308,18 +1308,7 @@ ajv@6.12.0:
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.2"
 
-ajv@^6.1.0, ajv@^6.10.0, ajv@^6.5.5:
-  version "6.12.1"
-  resolved "https://registry.npm.taobao.org/ajv/download/ajv-6.12.1.tgz#cce4d7dfcd62d3c57b1cd772e688eff5f5cd3839"
-  integrity sha1-zOTX381i08V7HNdy5ojv9fXNODk=
-  dependencies:
-    fast-deep-equal "^3.1.1"
-    fast-json-stable-stringify "^2.0.0"
-    json-schema-traverse "^0.4.1"
-    opencollective-postinstall "^2.0.2"
-    uri-js "^4.2.2"
-
-ajv@^6.10.2, ajv@^6.11.0, ajv@^6.12.0:
+ajv@^6.1.0, ajv@^6.10.0, ajv@^6.10.2, ajv@^6.11.0, ajv@^6.12.0, ajv@^6.5.5:
   version "6.12.3"
   resolved "https://registry.npm.taobao.org/ajv/download/ajv-6.12.3.tgz?cache=0&sync_timestamp=1593876991897&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fajv%2Fdownload%2Fajv-6.12.3.tgz#18c5af38a111ddeb4f2697bd78d68abc1cabd706"
   integrity sha1-GMWvOKER3etPJpe9eNaKvByr1wY=
@@ -1592,7 +1581,7 @@ atomic-sleep@^1.0.0:
   resolved "https://registry.npm.taobao.org/atomic-sleep/download/atomic-sleep-1.0.0.tgz#eb85b77a601fc932cfe432c5acd364a9e2c9075b"
   integrity sha1-64W3emAfyTLP5DLFrNNkqeLJB1s=
 
-avvio@^6.3.1, avvio@^6.4.1:
+avvio@^6.4.1, avvio@^6.5.0:
   version "6.5.0"
   resolved "https://registry.npm.taobao.org/avvio/download/avvio-6.5.0.tgz#d2cf119967fe90d2156afc29de350ced800cdaab"
   integrity sha1-0s8RmWf+kNIVavwp3jUM7YAM2qs=
@@ -3509,16 +3498,7 @@ fast-json-stable-stringify@2.1.0, fast-json-stable-stringify@2.x, fast-json-stab
   resolved "https://registry.npm.taobao.org/fast-json-stable-stringify/download/fast-json-stable-stringify-2.1.0.tgz#874bf69c6f404c2b5d99c481341399fd55892633"
   integrity sha1-h0v2nG9ATCtdmcSBNBOZ/VWJJjM=
 
-fast-json-stringify@^1.14.0:
-  version "1.20.1"
-  resolved "https://registry.npm.taobao.org/fast-json-stringify/download/fast-json-stringify-1.20.1.tgz#07e30057718d85c39a798d43678a4a91ea7fa30e"
-  integrity sha1-B+MAV3GNhcOaeY1DZ4pKkep/ow4=
-  dependencies:
-    ajv "^6.11.0"
-    deepmerge "^4.2.2"
-    string-similarity "^4.0.1"
-
-fast-json-stringify@^1.18.0:
+fast-json-stringify@^1.14.0, fast-json-stringify@^1.18.0:
   version "1.21.0"
   resolved "https://registry.npm.taobao.org/fast-json-stringify/download/fast-json-stringify-1.21.0.tgz?cache=0&sync_timestamp=1594219671480&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ffast-json-stringify%2Fdownload%2Ffast-json-stringify-1.21.0.tgz#51bc8c6d77d8c7b2cc7e5fa754f7f909f9e1262f"
   integrity sha1-UbyMbXfYx7LMfl+nVPf5CfnhJi8=
@@ -3595,14 +3575,14 @@ fastify@2.15.1:
     secure-json-parse "^2.1.0"
     tiny-lru "^7.0.2"
 
-fastify@^2.14.1:
-  version "2.14.1"
-  resolved "https://registry.npm.taobao.org/fastify/download/fastify-2.14.1.tgz#2946e8e9adebcd1b4f634178c8fb7162fb816cf4"
-  integrity sha1-KUbo6a3rzRtPY0F4yPtxYvuBbPQ=
+fastify@^2.15.1:
+  version "2.15.2"
+  resolved "https://registry.yarnpkg.com/fastify/-/fastify-2.15.2.tgz#fe7bb7723b5ef50cc28684fc2fabc24b3f9ae010"
+  integrity sha512-Inbodl5a/Vb12m2gjD+RRRSByPJByQ38KdxGS5IT4587S1jIn6gWv7pYELPreoGJgzsN5YfC4xsfpQ2Ju4M6iw==
   dependencies:
     abstract-logging "^2.0.0"
     ajv "^6.12.0"
-    avvio "^6.3.1"
+    avvio "^6.5.0"
     fast-json-stringify "^1.18.0"
     find-my-way "^2.2.2"
     flatstr "^1.0.12"
